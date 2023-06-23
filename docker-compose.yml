@@ -1,0 +1,44 @@
+version: "3"
+services:
+
+  frontend:
+    container_name: frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./front
+      target: prod
+      args:
+       - SERVER_CONNECTION=http
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+  backend:
+    container_name: backend
+    build:
+      dockerfile: Dockerfile
+      context: ./Backend
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+    ports:
+      - "2000:2000"
+
+  db:
+    image: mongo:4.4-bionic
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+    volumes:
+      - mongo-db:/data/db 
+ 
+
+networks:
+  mynetwork:
+
+volumes:
+  mongo-db:
