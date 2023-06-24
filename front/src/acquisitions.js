@@ -1,11 +1,12 @@
 import Chart from 'chart.js/auto'
-import { getAquisitionsByYear } from './api'
+//import { getAquisitionsByYear } from './api'
 //import Item from '../../models/dataItem.js'
 
-yakseli = [];
-xakseliTuotto = []
-xakseliLampo = []
-xakseliHinta = []
+var yakseli = []
+var xakseliTuotto = []
+var xakseliLampo = []
+var xakseliHinta = []
+var xakseliKulutus = []
 /*
 var ss = Item.find({})//createdAt: {$gt: start, $lt: end}}).exec()
 ss.array.forEach(element => {
@@ -62,12 +63,13 @@ const data = [
   for(var i in result) {
     xakseliTuotto.push(result[i].tuotto)
     xakseliLampo.push(result[i].lampo)
-    xakseliHinta.push(result[i].lampo)
-   // xakseliTuotto.push(result[i].tuotto);
+    xakseliHinta.push(result[i].hinta)
+    xakseliKulutus.push(result[i].kulutus);
+    console.log(result[i].kulutus)
     yakseli.push(result[i].createdAt)
   }
 
-  console.log(xakseliTuotto)
+  //console.log(xakseliTuotto)
   new Chart(
     document.getElementById('acquisitions'),
     {
@@ -114,6 +116,10 @@ const data = [
           {
             label: 'Lämpötila',
             data: xakseliLampo
+          },
+          {
+            label: 'Kulutus',
+            data: xakseliKulutus
           }
         ]
       }

@@ -131,7 +131,8 @@ export function stopQueries(){
 async function saveConsumptionData(){
 
   for (let it = 0; it < alut.length; it++){
-    var tt = await Item.updateMany({createdAt: {$gt: alut[it], $lt: loput[it]}}, {kulutus: Number(kulut[it].replace(",", "."))}).exec()
+    var tt = await Item.updateMany({createdAt: {$gt: alut[it], $lt: loput[it]}}, {kulutus: Number(kulut[it].replace(",", "."))*1000}).exec()
+
   }
 }
 
@@ -169,6 +170,7 @@ export const addConsumptionData = () => {
       const alku = new Date (date+colValues[1])
       const loppu = new Date (date + colValues[2])
       const kulutus = colValues[3];
+      console.log(alku, loppu, kulutus);
       alut.push(alku)
       loput.push(loppu)
       kulut.push(kulutus)
