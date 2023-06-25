@@ -1,12 +1,16 @@
 import Chart from 'chart.js/auto'
+//import Lightpick from 'lightpick'
 //import { getAquisitionsByYear } from './api'
 //import Item from '../../models/dataItem.js'
+import datepicker from 'js-datepicker'
 
 var yakseli = []
 var xakseliTuotto = []
 var xakseliLampo = []
 var xakseliHinta = []
 var xakseliKulutus = []
+
+
 /*
 var ss = Item.find({})//createdAt: {$gt: start, $lt: end}}).exec()
 ss.array.forEach(element => {
@@ -57,6 +61,17 @@ const data = [
     return modifiedValue;
   }
 
+  function datepicker() {
+    document.getElementById('DatePicker').datepicker();
+    };
+  //document.getElementById('DatePicker')
+/*
+  new Lightpick({
+    field: document.getElementById('myDatepicker'),
+    onSelect: function(date){
+        document.getElementById('result-1').innerHTML = date.format('Do MMMM YYYY');
+    }
+});*/
 
   var result = await getData('http://127.0.0.1:2000/getdata')
   result = JSON.parse(result);

@@ -96,17 +96,21 @@ async function getWeather(){
 }
 
 async function getInvStatus(){
-  
+  try{
   //var resp = await getData("http://192.168.0.3/solar_api/v1/GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1418160&DataCollection=CommonInverterData")
-  var resp = await getData("http://192.168.0.2/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System&DataCollection=NowSensorData")
-  resp = JSON.parse(resp);
-  const power = resp.Body.Data.PAC.Values[1];
-  return power
+    var resp = await getData("http://192.168.0.2/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System&DataCollection=NowSensorData")
+    resp = JSON.parse(resp);
+    const power = resp.Body.Data.PAC.Values[1];
+    return power
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 
 
 const stQueries = async () =>{
+  try{
     const weather = await getWeather()
     const temp = weather.Temperature
     const yiel = await getInvStatus() 
@@ -119,9 +123,12 @@ const stQueries = async () =>{
     console.log('Hinta: ', price, 'snt /(kW/h)');
     const result = yiel*price/100000
     console.log('Tuottoarvo/h: ', Math.round(result*100)/100, '€')
+  } catch(err) {
+    console.log(err)
+  }
   }
 
-export const startQueries = setInterval(stQueries, 6000);
+export const startQueries = setInterval(stQueries, 30000);
 
 
 export function stopQueries(){
