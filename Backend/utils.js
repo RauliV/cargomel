@@ -95,10 +95,10 @@ async function getWeather(){
 
 }
 
-async function getInvStatus(){
+export async function getInvStatus(){
   try{
   //var resp = await getData("http://192.168.0.3/solar_api/v1/GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1418160&DataCollection=CommonInverterData")
-    var resp = await getData("http://192.168.0.2/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System&DataCollection=NowSensorData")
+    var resp = await getData("http://192.168.50.96/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System&DataCollection=NowSensorData")
     resp = JSON.parse(resp);
     const power = resp.Body.Data.PAC.Values[1];
     return power

@@ -1,4 +1,4 @@
-import {startQueries, stopQueries} from './utils.js'
+import {getInvStatus, startQueries, stopQueries} from './utils.js'
 
 import {addConsumptionData, fetchData} from './utils.js'
 import express from 'express'
@@ -60,8 +60,9 @@ app.post('/getdata', async (req, res) => {
     console.log(req.body)
     //const alku = req.body[0].alku;
     //const loppu = req.body[0].loppu;
-    const alku = "2023-06-15T05:00:00.000Z"
-    const loppu =  "2023-07-15T17:59:00.000Z"
+    const alku = "2023-12-15T05:00:00.000Z"
+    //const loppu =  "2024-01-05T17:59:00.000Z"
+    const loppu =  Date.now();
     console.log('Fetching data...', alku, loppu)
     //res.setHeader("Authorization:", "*")
     res.setHeader('Content-Type', 'application/json');
@@ -89,6 +90,14 @@ app.get('/startquery', async (req, res) => {
     startQueries;
     res.status = 200
     res.end()
+})
+
+app.get('/invstatus', async (req, res) => {
+    console.log('Invertterin tuotto ');
+
+    res.status = 200;
+   //j res.send(await getInvStatus())
+    res.end();
 })
 
 app.get('/stopquery', (req, res) => {

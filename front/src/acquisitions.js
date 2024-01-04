@@ -84,6 +84,14 @@ const data = [
     yakseli.push(result[i].createdAt)
   }
 
+  const ctime = new Date(result[result.length-1].createdAt)
+
+  var cday = ctime.getDay()+"."+(ctime.getMonth()+1)+"."+ctime.getFullYear()
+  const cclock = ctime.getHours()+":"+ctime.getMinutes()
+  var ctuotto = result[result.length-1].tuotto
+  document.getElementById('current').innerHTML=cday+"|"+cclock
+  document.getElementById('tuotto').innerHTML="Tuotto: "+ctuotto
+
   //console.log(xakseliTuotto)
   new Chart(
     document.getElementById('acquisitions'),
